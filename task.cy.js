@@ -76,15 +76,16 @@ describe('Cypress Testų Scenarijai', () => {
 
   describe('5. Asinchroninės operacijos testas', () => {
     it('Patikrina, ar asinchroninė operacija baigiasi teisingai', () => {
-      // Paspaudžiame mygtuką, kuris iškviečia asinchroninę operaciją
-      cy.get('button#async-action').click();
+      cy.get('#async-action').click();
+ 
       // Iškart po paspaudimo turi būti rodomas pranešimas
-      cy.get('div#async-result').should('be.visible');
+      cy.get('#async-result').should('contain', 'Operacija prasidėjo...');
+ 
       // Laukiame, kol asinchroninė operacija baigsis (naudojame šiek tiek ilgesnį timeout)
-      // JŪSŲ KODAS
+      cy.get('#async-result', { timeout: 3500 }).should('contain', 'Asinchroninė operacija baigta!');
     });
   });
-
+ 
   describe('6. Hover efekto testas', () => {
     it('Rodo tooltip, kai užvedama pele ant hover-box', () => {
       // Iš pradžių tooltip neturėtų būti matomas
